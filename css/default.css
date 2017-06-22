@@ -1,0 +1,122 @@
+/*
+ * Customized css for inputs
+ */
+
+.input-label {
+	color: #999;
+	text-decoration: none;
+	font-style: italic;
+	display: inline-block;
+	margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.full-width {
+	width: 100%;
+    display:block;
+    font-size: 22px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+	text-align: left;
+}
+
+.smart-padding {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.icon-links {
+    padding: 1%;
+}
+
+.submit-button {
+    text-align: right;
+    padding: 0 2% 0 0;
+    margin: 0;
+}
+
+.inner-submit {
+    padding: 0;
+}
+
+ .inner-delete {
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.inner-form {
+    padding-bottom: 10px;
+}
+
+.text-area {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#form-item > label:last-of-type {
+    background-color: transparent;
+    -webkit-animation-name: flicker; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 1s; /* Safari 4.0 - 8.0 */
+    animation-name: flicker;
+    animation-duration: 1s;
+}
+
+.select-options {
+    z-index: 99;
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.delete-button {
+    color: #999;
+    font-size: 14px;
+    display: inline-block;
+    width: 20%;
+    text-align: right;
+}
+
+.delete-option {
+     color: #999;
+     font-size: 14px;
+     padding-left: 2%;
+}
+
+.deleteall {
+     color: #666;
+     font-size: 12px;
+     padding-left: 2%;
+}
+
+.reduce {
+    padding-left: 0;
+    text-align: left;
+}
+
+.reduce > input,  .reduce > textarea {
+    display: inline-block;
+    width: 90%;
+}
+
+textarea {
+    width: 100%;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes flicker {
+    from {background-color: #999;}
+    to {background-color: transparent;}
+}
+
+/* Standard syntax */
+@keyframes flicker {
+    from {background-color: #999;}
+    to {background-color: transparent;}
+}
+
+@media (max-width: 62em) {
+  .masthead-brand {
+    display: none;
+  }
+}

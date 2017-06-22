@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Dynamic form builder created using Vanilla JS.">
+    <meta name="author" content="Diego Sarmiento">
+    <link rel="icon" href="img/favicon.ico">
+    <title>Forms Builder</title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/cover.css" rel="stylesheet">
+    <!-- Default styles for this template -->
+    <link href="css/default.css" rel="stylesheet">
+    <!-- Font awesome for icons -->
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <div class="site-wrapper">
+      <div class="site-wrapper-inner">
+        <div class="cover-container">
+          <div class="masthead clearfix">
+            <div class="inner">
+              <!-- Top Menu -->
+              <h3 class="masthead-brand"><a href="http://diegosarmiento.com/" target="_blank">DS</a></h3>
+              <nav class="nav nav-masthead">
+                <a href="#" class="nav-link" onclick="ds.addTitle('Edit Title:')"><i class="fa fa-font fa-lg" aria-hidden="true"></i></a>
+                <a href="#" class="nav-link" onclick="ds.addInput('text', '')"><i class="fa fa-plus-square-o fa-lg" aria-hidden="true"></i></a>
+                <a href="#" class="nav-link" onclick="ds.addInput('checkbox', '')"><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i></a>
+                <a href="#" class="nav-link" onclick="ds.addInput('radio', '')"><i class="fa fa-dot-circle-o fa-lg" aria-hidden="true"></i></a>
+                <a href="#" class="nav-link" onclick="ds.addInput('textarea', '')"><i class="fa fa-align-justify fa-lg" aria-hidden="true"></i></a>
+                <a href="#" class="nav-link" onclick="ds.addOptions()"><i class="fa fa-list-ul fa-lg" aria-hidden="true"></i></a>
+              </nav>
+            </div>
+          </div>
+ 
+           <div class="inner cover select-options" id="options-container">
+             <div class="container">
+              <!-- Dynamic Layer/Div with the options that should be defined for the select menu -->
+              <form id="customized-options">
+                <div class="form-group row submit-button">
+                  <div class="offset-sm-2 col-sm-10 inner-delete">
+                    <a href="#" onclick="ds.deleteAll()" class="deleteall" ><i class="fa fa-times fa-lg" aria-hidden="true"></i></a>
+                  </div>
+                 </div>
+                <div class="form-group row" id="form-options"></div>
+                <div class="form-group row submit-button">
+                  <div class="col-sm-10 inner-form">
+                    <label for="add-new-option"><a href="#" onclick="ds.addOptions(document.getElementById('customized-options'));"><i class="fa fa-plus fa-lg" aria-hidden="true"></i></a></label>
+                  </div>
+                </div>
+                <div class="form-group row submit-button">
+                  <div class="col-sm-10 inner-form">
+                    <button type="submit" class="btn btn-outline-danger sm" id="save-options" onclick="ds.savedOptions(document.getElementById('customized-options'));">Save Options</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+           <!-- Content when there are no inputs yet -->
+          <div class="inner cover" id="form-dynamic">
+            <h1 class="cover-heading" id="intro-title">Create a Form.</h1>
+            <p class="lead" id="intro-description">Each button on the top right menu allows you to add titles and/or different input types. Feel free to use it and play with it.</p>
+
+            <div class="container">
+              <!-- Dynamic Layer/Div with all the inputs -->
+              <form>
+                <div class="form-group row submit-button" id="delete-button">
+                  <div class="offset-sm-2 col-sm-10 inner-delete">
+                    <a href="#" onclick="ds.deleteAll()" class="deleteall" ><i class="fa fa-times fa-lg" aria-hidden="true"></i></a>
+                  </div>
+                </div>
+                <div class="form-group row" id="form-item"></div>
+                <div class="form-group row submit-button" id="submit-button">
+                  <div class="offset-sm-2 col-sm-10 inner-submit">
+                    <button type="submit" class="btn btn-outline-info" id="submit">Submit</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+           </div>
+
+          <div class="mastfoot">
+            <!-- Thank you Bootstrap -->
+            <div class="inner">
+              <p>Template built using <a href="https://v4-alpha.getbootstrap.com" target="_blank">Bootstrap V4.0</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <script src="js/dsbuilder.js"></script>
+    <script src="js/app.js"></script>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"><\/script>')</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
