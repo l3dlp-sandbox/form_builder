@@ -33,7 +33,7 @@ The index file already includes dependencies such as Bootstrap.
 ## Dependencies
 
 What you need to run this app:
-* Bootstrap 4 (CDN links included in index.html file)
+* Bootstrap 4 (included in index.html file)
 * Chrome or Firefox (Use version [50.0.3](https://www.mozilla.org))
 
 ## Software Architecture
@@ -52,7 +52,7 @@ No, this repo already has all its dependencies (You can add your own code in the
 
 #### How to include new sections ?
 
-You are ready to go for a Single Page Application (just add the JavaScript in the `app.js` file). For a bigger app keep the focus on small and reusable components components that could be included in the `js` folder. Another option is using `React` or `AngularJS`.
+You are ready to go for a Single Page Application (just add the JavaScript code in the `app.js` file). For a bigger app keep the focus on small and reusable components that could be included in the `js` folder. Another option is using `React` or `AngularJS`.
 
 # License
 
