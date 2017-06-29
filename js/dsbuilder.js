@@ -208,18 +208,17 @@ var publishInput = function (items) {
 		var mapLen = items.size - 1;
 		var labels = "input-text" + key;
 		var labelid = "'" + labels + "'";
-
+		var type = "'text'";
 		var parentLabel = 'input-label' + key;
 		var parentId = "'" + parentLabel + "'";
 		var parentDiv = 'input-div' + key;
 		var parentDivId = "'" + parentDiv + "'";
-
 		var option = 'Edit ';
 		if (key == mapLen) {
 			var htmlDiv = '<label class="col-sm-2 col-form-label input-label" id="' + parentLabel + '"><a href="#" contentEditable onclick="ds.editText(' 
 			+ labelid + ')" id="' + labels +'">' + option + key + '</a></label><div class="col-sm-10 reduce" id="' + parentDiv + '">' + value +
 			'<a href="#" class="delete-option" onclick="ds.deleteInput(' + key + ',' + parentDivId + ',' + parentId + 
-			')"><i class="fa fa-times fa-lg" aria-hidden="true"></i></a></div>';
+			',' + type + ')"><i class="fa fa-times fa-lg" aria-hidden="true"></i></a></div>';
 			var element = document.getElementById('form-item');
 			element.innerHTML += htmlDiv;
 		}
@@ -272,18 +271,17 @@ var publishArea = function (items) {
 	var option = 'Edit ' + key;
 	var labels = "area-input" + key;
 	var labelid = "'" + labels + "'";
-
+	var type = "'textarea'";
 	var parentLabel = 'area-label' + key;
 	var parentId = "'" + parentLabel + "'";
 	var parentDiv = 'area-div' + key;
 	var parentDivId = "'" + parentDiv + "'";
-
 		if (key === mapLen) {
 			var htmlDiv = '<label class="col-sm-2 col-form-label input-label" id="' + parentLabel + 
 		    '"><a href="#" contentEditable onclick="ds.editText(' + labelid + ')" id="' + labels +
 		    '">' + option + '</a></label><div class="col-sm-10 text-area reduce" id="' + parentDiv + '">' 
 			+ value + '<a href="#" class="delete-option" onclick="ds.deleteArea(' + key + ',' + parentDivId + ',' + parentId + 
-			')"><i class="fa fa-times fa-lg" aria-hidden="true"></i></a></div>';
+			',' + type + ')"><i class="fa fa-times fa-lg" aria-hidden="true"></i></a></div>';
 			var element = document.getElementById('form-item');
 			element.innerHTML += htmlDiv;
 		}
@@ -298,10 +296,11 @@ var publishTitle = function (items) {
 	var mapLen = items.size - 1;
 	var labels = "label-title" + key;
 	var labelid = "'" + labels + "'";
+	var type = "'title'";
 	var parentLabel = 'title-parent-title' + key;
 	var parentId = "'" + parentLabel + "'";
 		if (key === mapLen) {
-			var htmlDiv = '<label for="' + labels + '" class="full-width"  id="' + parentLabel + '"><a href="#" contentEditable onclick="ds.editText(' + labelid + ')" id="' + labels +'">' + value + '</a><a href="#" class="delete-button" onclick="ds.deleteTitle(' + key + ',' + labelid + ',' + parentId + ')"><i class="fa fa-times fa-lg" aria-hidden="true"></i></a></label>';
+			var htmlDiv = '<label for="' + labels + '" class="full-width"  id="' + parentLabel + '"><a href="#" contentEditable onclick="ds.editText(' + labelid + ')" id="' + labels +'">' + value + '</a><a href="#" class="delete-button" onclick="ds.deleteTitle(' + key + ',' + labelid + ',' + parentId + ',' + type + ')"><i class="fa fa-times fa-lg" aria-hidden="true"></i></a></label>';
 			var element = document.getElementById('form-item');
 			element.innerHTML += htmlDiv;
 		}
@@ -376,30 +375,20 @@ var deleteOptions = function (id, option, button) {
 };
 
 /*
-Method for deleting titles
+Method for updating different items
 */
-var deleteTitle = function (id, option, parent) {
-	itemTitle.delete(id);
-	deleteElement(parent);
-	checkIfEmpty(allContent);
-};
-
-/*
-Method for deleting inputs
-*/
-var deleteInput = function (id, option, parent) {
-	itemText.delete(id);
-	deleteElement(option);
-	deleteElement(parent);
-	checkIfEmpty(allContent);
-};
-
-/*
-Method for deleting textareas
-*/
-var deleteArea = function (id, option, parent) {
-	itemArea.delete(id);
-	deleteElement(option);
+var updateItem = function (id, option, parent, type) {
+	if (type === 'text') {
+		itemText.delete(id);
+		deleteElement(option);
+	}
+	else if (type === 'textarea') {
+		itemArea.delete(id);
+		deleteElement(option);
+	}
+	else if (type === 'title') {
+		itemTitle.delete(id);
+	}
 	deleteElement(parent);
 	checkIfEmpty(allContent);
 };
@@ -413,7 +402,7 @@ var deleteItem = function (type, id, option, parent) {
 		itemCheck.delete(id);
 		var map = itemCheck;
 	}
-	if (type === 'select') {
+	else if (type === 'select') {
 		itemSelect.delete(id);
 		var map = itemSelect;
 	}
@@ -494,66 +483,43 @@ Public methods available
 */
 Dsbuilder.prototype = {
 	addTitle: function (title) {
-		this.title = title;
-		return createTitle(this.title);
+		return createTitle(title);
 	},
 
 	addInput: function (type, value, options) {
-		this.type = type;
-		this.value = value;
-		this.options = options;
-		return createInput(this.type, this.value, this.options);
+		return createInput(type, value, options);
 	},
 
 	addOptions: function (options) {
-		this.options = options;
-		return createOptions(this.options);
+		return createOptions(options);
 	},
 
 	savedOptions: function (element) {
-		this.element = element;
-		return saveOptions(this.element);
+		return saveOptions(element);
 	},
 
 	deleteOptions: function (id, option, button) {
-		this.id = id;
-		this.option = option;
-		this.button = button;
-		return deleteOptions(this.id, this.option, this.button);
+		return deleteOptions(id, option, button);
 	},
 
-	deleteInput: function (id, option, parent) {
-		this.id = id;
-		this.option = option;
-		this.parent = parent;
-		return deleteInput(this.id, this.option, this.parent);
+	deleteInput: function (id, option, parent, type) {
+		return updateItem(id, option, parent, type);
 	},
 
 	editText: function (key) {
-		this.key = key;
-		return editText(this.key);
+		return editText(key);
 	},
 
 	deleteItem: function (type, id, option, parent) {
-		this.type = type;
-		this.id = id;
-		this.option = option;
-		this.parent = parent;
-		return deleteItem(this.type, this.id, this.option, this.parent);
+		return deleteItem(type, id, option, parent);
 	},
 
-	deleteArea: function (id, option, parent) {
-		this.id = id;
-		this.option = option;
-		this.parent = parent;
-		return deleteArea(this.id, this.option, this.parent);
+	deleteArea: function (id, option, parent, type) {
+		return updateItem(id, option, parent, type);
 	},
 
-	deleteTitle: function (id, option, parent) {
-		this.id = id;
-		this.option = option;
-		this.parent = parent;
-		return deleteTitle(this.id, this.option, this.parent);
+	deleteTitle: function (id, option, parent, type) {
+		return updateItem(id, option, parent, type);
 	},
 
 	deleteAll: function () {
