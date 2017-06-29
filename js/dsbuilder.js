@@ -44,18 +44,22 @@ var itemSelectOptions = new Map();
 var defaultOptions = new Map();
 
 /*
+An array with almost all maps
+*/
+var someContent = [itemText, itemCheck, itemRadio, itemArea, itemTitle, itemSelect];
+
+/*
 An array with all maps
 */
-var allContent = [itemText, itemCheck, itemRadio, itemArea, itemTitle, itemSelect];
-
+var allContent = [itemText, itemCheck, itemRadio, itemArea, itemTitle, itemSelect, itemOptions, itemSelectOptions, defaultOptions];
 
 /*
 Hard core function to clear maps and remove childs from the user interface
 */
-var resetAll = function (allContent) {
-	for (var i=0, l=allContent.length-1; i<l; i++) {
-		if (allContent[i].size > 0) {
-			removeChilds(allContent[i], 'form-item');
+var resetAll = function (someContent) {
+	for (var i=0, l=someContent.length-1; i<l; i++) {
+		if (someContent[i].size > 0) {
+			removeChilds(someContent[i], 'form-item');
 		}
 	}
 }
@@ -63,7 +67,7 @@ var resetAll = function (allContent) {
 /*
 Initialize and clear everything
 */
-var resetValues = function () {
+var resetValues = function (content) {
 	textNumber = 0;
 	checkNumber = 0;
 	radioNumber = 0;
@@ -73,7 +77,7 @@ var resetValues = function () {
 	optionNumber = 0;
 	selectOptionNumber = 0;
 
-	resetAll(allContent);
+	resetAll(content);
 };
 
 /*
@@ -390,7 +394,7 @@ var updateItem = function (id, option, parent, type) {
 		itemTitle.delete(id);
 	}
 	deleteElement(parent);
-	checkIfEmpty(allContent);
+	checkIfEmpty(someContent);
 };
 
 /*
@@ -412,7 +416,7 @@ var deleteItem = function (type, id, option, parent) {
 	}
 	deleteElement(option);
 	deleteElement(parent);
-	checkIfEmpty(allContent);
+	checkIfEmpty(someContent);
 };
 
 /*
@@ -435,11 +439,11 @@ var checkIfMapEmpty = function (map){
 /*
 Same than checkIfMapEmpty but for arrays of maps
 */
-var checkIfEmpty = function (allContent){
+var checkIfEmpty = function (someContent){
 	var j = 0;
-	for (var i=0, l=allContent.length; i<l; i++) {
-		if (allContent[i].size > 0) {
-			j += allContent[i].size;
+	for (var i=0, l=someContent.length; i<l; i++) {
+		if (someContent[i].size > 0) {
+			j += someContent[i].size;
 		}
 	}
 	if (j === 0) {
@@ -473,7 +477,7 @@ var checkOnInit = function (){
 		document.getElementById('delete-button').style.display = 'none';
 		document.getElementById('intro-title').style.display = 'block';
 		document.getElementById('intro-description').style.display = 'block';
-		resetValues();
+		resetValues(someContent);
 		return false;
 	}
 };
@@ -523,7 +527,7 @@ Dsbuilder.prototype = {
 	},
 
 	deleteAll: function () {
-		resetValues();
+		resetValues(allContent);
 		checkOnInit();
 		selectDisplay(false);
 	}
