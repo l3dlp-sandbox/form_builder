@@ -1,4 +1,4 @@
-# Form Builder
+# Dsbuilder Library
 
 ### Demo
 
@@ -25,6 +25,7 @@ The index file already includes dependencies such as Bootstrap.
 # Table of Contents
 
 * [Getting Started](#getting-started)
+* [Methods Available](#methods-available)
 * [Frequently asked questions](#faq)
 * [License](#license)
 
@@ -43,6 +44,21 @@ What you need to run this app:
 * Code won't interfere with your own (IIFE principle).
 * Reusable and readable.
 * Easy to scale.
+
+## Methods Available
+
+* addTitle(title)
+* addInput(type, value, options)
+* addOptions(options)
+* savedOptions(element)
+* deleteOptions(id, option, button)
+* editText()
+* deleteInput(id, option, parent, type)
+* deleteInput(id, option, parent, type)
+* deleteItem(id, option, parent, type)
+* deleteArea(id, option, parent, type)
+* deleteTitle(id, option, parent, type)
+* deleteAll()
 
 # FAQ
 
