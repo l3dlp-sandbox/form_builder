@@ -47,17 +47,17 @@ What you need to run this app:
 
 ## Methods Available
 
-* addTitle(title)
-* addInput(type, value, options)
-* addOptions(options)
-* savedOptions(element)
-* deleteOptions(id, option, button)
-* editText()
-* deleteInput(id, option, parent, type)
-* deleteInput(id, option, parent, type)
-* deleteItem(id, option, parent, type)
-* deleteArea(id, option, parent, type)
-* deleteTitle(id, option, parent, type)
+* addTitle(title:string)
+* addInput(type:string, value:string, options:optional)
+* addOptions(options:optional)
+* savedOptions(element:string)
+* deleteOptions(id:string, option:string, button:string)
+* editText(key:number)
+* deleteInput(id:number, option:string, parent:string, type:string)
+* deleteInput(id:number, option:string, parent:string, type:string)
+* deleteItem(id:number, option:string, parent:string, type:string)
+* deleteArea(id:number, option:string, parent:string, type:string)
+* deleteTitle(id:number, option:string, parent:string, type:string)
 * deleteAll()
 
 # FAQ
