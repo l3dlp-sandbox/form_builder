@@ -4,7 +4,7 @@ IIFE in order to not mix the code with other libraries
 ;(function (global) {
 
 /*
-We create a constructor and initialized
+We initialized the new instance
 */
 var Dsbuilder = function () {
 	return new Dsbuilder.init();
@@ -44,7 +44,7 @@ var itemSelectOptions = new Map();
 var defaultOptions = new Map();
 
 /*
-An array with almost all maps
+An array with -almost- all maps
 */
 var someContent = [itemText, itemCheck, itemRadio, itemArea, itemTitle, itemSelect];
 
@@ -54,7 +54,7 @@ An array with all maps
 var allContent = [itemText, itemCheck, itemRadio, itemArea, itemTitle, itemSelect, itemOptions, itemSelectOptions, defaultOptions];
 
 /*
-Hard core function to clear maps and remove childs from the user interface
+Hard core method to clear maps and remove childs from the user interface
 */
 var resetAll = function (someContent) {
 	for (var i=0, l=someContent.length-1; i<l; i++) {
@@ -65,7 +65,7 @@ var resetAll = function (someContent) {
 }
 
 /*
-Initialize and clear everything
+Initialize and clear all values
 */
 var resetValues = function (content) {
 	textNumber = 0;
@@ -81,7 +81,7 @@ var resetValues = function (content) {
 };
 
 /*
-Method for defining the inputs and textareas
+Method for defining the inputs (text, radio, checkbox) and textareas
 */
 var createInput = function (type, value, optionsDefault) {
 	if (type === inputs.type[0]) {
@@ -230,7 +230,7 @@ var publishInput = function (items) {
 };
 
 /*
-Method for publishing the items (checkboxs or radios)
+Method for publishing items (checkboxs or radios)
 */
 var publishItem = function (items, type) {
 	items.forEach(function(value, key) {
@@ -267,7 +267,7 @@ var publishItem = function (items, type) {
 };
 
 /*
-Method for publishing textarea inputs
+Method for publishing 'textarea' inputs
 */
 var publishArea = function (items) {
 	items.forEach(function(value, key) {
@@ -293,7 +293,7 @@ var publishArea = function (items) {
 };
 
 /*
-Method for publishing Titles (text)
+Method for publishing Titles
 */
 var publishTitle = function (items) {
 	items.forEach(function(value, key) {
@@ -319,7 +319,7 @@ var editText = function (key) {
 };
 
 /*
-Method for switching (on/off) divs
+Method for switching display (on/off)
 */
 var selectDisplay = function (open){
 	if (open) {
@@ -546,7 +546,7 @@ Inheritance of init to Dsbuilder
 Dsbuilder.init.prototype = Dsbuilder.prototype;
 
 /*
-How you actually call this library
+How you actually call this library from outside
 */
 global.Dsbuilder = Dsbuilder;
 
