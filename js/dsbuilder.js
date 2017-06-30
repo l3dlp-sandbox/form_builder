@@ -379,7 +379,7 @@ var deleteOptions = function (id, option, button) {
 };
 
 /*
-Method for updating different items
+Method for updating elements in the UI
 */
 var updateItem = function (id, option, parent, type) {
 	if (type === 'text') {
@@ -398,7 +398,7 @@ var updateItem = function (id, option, parent, type) {
 };
 
 /*
-Method for deleting options/items
+Method for deleting content options (select) and inputs (checkbox, radio)
 */
 var deleteItem = function (type, id, option, parent) {
 	var map = new Map();
