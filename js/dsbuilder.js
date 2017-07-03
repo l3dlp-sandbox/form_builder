@@ -208,105 +208,98 @@ var publishDefaultOptions = function (items) {
 Method for publishing inputs
 */
 var publishInput = function (items) {
-	items.forEach(function(value, key) {
-		var mapLen = items.size - 1;
-		var labels = "input-text" + key;
-		var labelid = "'" + labels + "'";
-		var type = "'text'";
-		var parentLabel = 'input-label' + key;
-		var parentId = "'" + parentLabel + "'";
-		var parentDiv = 'input-div' + key;
-		var parentDivId = "'" + parentDiv + "'";
-		var option = 'Edit ';
-		if (key == mapLen) {
-			var htmlDiv = '<label class="col-sm-2 col-form-label input-label" id="' + parentLabel + '"><a href="#" contentEditable onclick="ds.editText(' 
-			+ labelid + ')" id="' + labels +'">' + option + key + '</a></label><div class="col-sm-10 reduce" id="' + parentDiv + '">' + value +
-			'<a href="#" class="delete-option" onclick="ds.deleteInput(' + key + ',' + parentDivId + ',' + parentId + 
-			',' + type + ')"><i class="fa fa-times fa-lg" aria-hidden="true"></i></a></div>';
-			var element = document.getElementById('form-item');
-			element.innerHTML += htmlDiv;
-		}
-	});
+	publishElement(items, 'text', "input-text", 'input-label', 'input-div');
 };
 
 /*
 Method for publishing items (checkboxs or radios)
 */
 var publishItem = function (items, type) {
-	items.forEach(function(value, key) {
-		var mapLen = items.size - 1;
-		var option = 'Edit ';
-		if (type === 'checkbox') {
-			var labels = "label-check" + key;
-		}
-		if (type === 'select') {
-			var labels = "label-select" + key;
-		}
-		else if (type === 'radio') {
-			var labels = "label-radio" + key;
-		}
-		var labelid = "'" + labels + "'";
-		var inputType = "'" + type + "'";
-		var parentLabel = 'item-label' + key;
-		var parentId = "'" + parentLabel + "'";
-		var parentDiv = 'item-div' + key;
-		var parentDivId = "'" + parentDiv + "'";
-		if (mapLen === 0 && type !== 'select') {
-			createTitle('Edit Menu Title:');
-		}
-		if (key === mapLen) {
-			var htmlDiv = '<label class="col-sm-2 col-form-label input-label" id="' + parentLabel + 
-			'"><a href="#" contentEditable onclick="ds.editText(' + labelid + ')" id="' + labels +'">' 
-			+ option + key +'</a></label><div class="col-sm-10 smart-padding" id="' + parentDiv +'">' + value + 
-			'<a href="#" class="delete-button" onclick="ds.deleteItem('  + inputType + ',' + key + ',' 
-			+ parentDivId + ',' + parentId + ')"><i class="fa fa-times fa-lg" aria-hidden="true"></i></a></div>';
-			var element = document.getElementById('form-item');
-			element.innerHTML += htmlDiv;
-		}
-	});
+	if (type === 'checkbox') {
+		var labels = "label-check";
+	}
+	else if (type === 'select') {
+		var labels = "label-select";
+	}
+	else if (type === 'radio') {
+		var labels = "label-radio";
+	}
+	publishElement(items, type, labels, 'item-label', 'item-div');
 };
 
 /*
 Method for publishing 'textarea' inputs
 */
 var publishArea = function (items) {
-	items.forEach(function(value, key) {
-	var mapLen = items.size - 1;
-	var option = 'Edit ' + key;
-	var labels = "area-input" + key;
-	var labelid = "'" + labels + "'";
-	var type = "'textarea'";
-	var parentLabel = 'area-label' + key;
-	var parentId = "'" + parentLabel + "'";
-	var parentDiv = 'area-div' + key;
-	var parentDivId = "'" + parentDiv + "'";
-		if (key === mapLen) {
-			var htmlDiv = '<label class="col-sm-2 col-form-label input-label" id="' + parentLabel + 
-		    '"><a href="#" contentEditable onclick="ds.editText(' + labelid + ')" id="' + labels +
-		    '">' + option + '</a></label><div class="col-sm-10 text-area reduce" id="' + parentDiv + '">' 
-			+ value + '<a href="#" class="delete-option" onclick="ds.deleteArea(' + key + ',' + parentDivId + ',' + parentId + 
-			',' + type + ')"><i class="fa fa-times fa-lg" aria-hidden="true"></i></a></div>';
-			var element = document.getElementById('form-item');
-			element.innerHTML += htmlDiv;
-		}
-	});
+	publishElement(items, 'textarea', "area-input", 'area-label', 'area-div');
 };
 
 /*
 Method for publishing Titles
 */
 var publishTitle = function (items) {
-	items.forEach(function(value, key) {
+	publishElement(items, 'title', "label-title", 'title-parent-title', '');
+};
+
+/*
+Method for adding simple quotations to an expression
+*/
+var addQuotations = function (word) {
+	var expression = "'" + word + "'";
+	return expression;
+}
+
+/*
+Method for publishing all elements (in general)
+*/
+var publishElement = function (items, type, labelName, labelParent, divParent) {
 	var mapLen = items.size - 1;
-	var labels = "label-title" + key;
-	var labelid = "'" + labels + "'";
-	var type = "'title'";
-	var parentLabel = 'title-parent-title' + key;
-	var parentId = "'" + parentLabel + "'";
+	var quotedType = addQuotations(type);
+	items.forEach(function(value, key) {
+		var labels = labelName + key;
+		var labelid = addQuotations(labels);
+		var parentLabel = labelParent + key;
+		var parentId = addQuotations(parentLabel);
+		var parentDiv = divParent + key;
+		var parentDivId = addQuotations(parentDiv);
 		if (key === mapLen) {
-			var htmlDiv = '<label for="' + labels + '" class="full-width"  id="' + parentLabel + '"><a href="#" contentEditable onclick="ds.editText(' + labelid + ')" id="' + labels +'">' + value + '</a><a href="#" class="delete-button" onclick="ds.deleteTitle(' + key + ',' + labelid + ',' + parentId + ',' + type + ')"><i class="fa fa-times fa-lg" aria-hidden="true"></i></a></label>';
+			if (type && type !== 'textarea') {
+				var option = 'Edit ';
+				if (type === 'title') {
+					var divCode = '<label for="' + labels + '" class="full-width" id="' + parentLabel + 
+					'"><a href="#" contenteditable="true" onclick="ds.editText(' + labelid + ')" id="' + 
+					labels +'">' + value + '</a><a href="#" class="delete-button" onclick="ds.deleteTitle(' + 
+					key + ',' + labelid + ',' + parentId + ',' + quotedType + 
+					')"><i class="fa fa-times fa-lg" aria-hidden="true"></i></a></label>';
+				}
+				else if (type === 'text') {
+					var divCode = '<label class="col-sm-2 col-form-label input-label" id="' + parentLabel + 
+					'"><a href="#" contenteditable="true" onclick="ds.editText(' + labelid + ')" id="' + labels +'">' 
+					+ option + key + '</a></label><div class="col-sm-10 reduce" id="' + parentDiv + '">' + value +
+					'<a href="#" class="delete-option" onclick="ds.deleteInput(' + key + ',' + parentDivId + ',' + parentId + 
+					',' + quotedType + ')"><i class="fa fa-times fa-lg" aria-hidden="true"></i></a></div>';
+				}
+				else {
+					if (mapLen === 0 && type !== 'select') {
+						createTitle('Edit Menu Title:');
+					}
+					var divCode = '<label class="col-sm-2 col-form-label input-label" id="' + parentLabel + 
+					'"><a href="#" contenteditable="true" onclick="ds.editText(' + labelid + ')" id="' + labels +'">' 
+					+ option + key +'</a></label><div class="col-sm-10 smart-padding" id="' + parentDiv +'">' + value + 
+					'<a href="#" class="delete-button" onclick="ds.deleteItem('  + quotedType + ',' + key + ',' 
+					+ parentDivId + ',' + parentId + ')"><i class="fa fa-times fa-lg" aria-hidden="true"></i></a></div>';
+				}
+			}
+			else if (type === 'textarea') {	
+					var option = 'Edit ' + key;
+					var divCode = '<label class="col-sm-2 col-form-label input-label" id="' + parentLabel + 
+				    '"><a href="#" contenteditable="true" onclick="ds.editText(' + labelid + ')" id="' + labels +
+				    '">' + option + '</a></label><div class="col-sm-10 text-area reduce" id="' + parentDiv + '">' 
+					+ value + '<a href="#" class="delete-option" onclick="ds.deleteArea(' + key + ',' + parentDivId + ',' + parentId + 
+					',' + quotedType + ')"><i class="fa fa-times fa-lg" aria-hidden="true"></i></a></div>';
+			}
 			var element = document.getElementById('form-item');
-			element.innerHTML += htmlDiv;
+			element.innerHTML += divCode;
 		}
 	});
 };
@@ -348,8 +341,10 @@ Method for saving the options defined for the select menus
 */
 var saveOptions = function (options){
 	var codedOptions = [];
-	for (var i=0, l=options.length-1; i<l; i++) {
-		codedOptions.push(options.elements[i].value);
+	if (options.length) {
+		for (var i=0, l=options.length-1; i<l; i++) {
+			codedOptions.push(options.elements[i].value);
+		}
 	}
 	var defaultOptions = codedOptions || ['Option 1', 'Option 2', 'Option 3'];
 	createSelect(defaultOptions);
